@@ -1,19 +1,11 @@
 import { Button, Input } from '@atoms';
-import { ChangeEvent, FC, useState } from 'react';
+import { FC, useContext } from 'react';
 import { ISearchBar } from '@interfaces';
+import { StockContext } from '@providers';
 
 export const SearchBar: FC<ISearchBar> = (props) => {
   const { id, label } = props;
-  const [search, setSearch] = useState('');
-
-  const onClick = () => {
-    console.log(search);
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
-    setSearch(event.target.value);
-  };
+  const { search, handleChange, onClick } = useContext(StockContext);
 
   return (
     <div className="searchBar">

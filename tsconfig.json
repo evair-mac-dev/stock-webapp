@@ -41,6 +41,10 @@
       "@utils": [
         "./src/utils",
         "./src/utils/*"
+      ],
+      "@providers": [
+        "./src/providers",
+        "./src/providers/*"
       ]
     }
   },

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ITable } from '@interfaces';
-import { Row } from '@molecules';
 import { capitalize } from '@utils';
+import { Row } from '@molecules';
 
 export const Table: FC<ITable> = (props) => {
   const { data } = props;

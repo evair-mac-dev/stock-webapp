@@ -37,3 +37,10 @@ export interface ISearchBar {
   id: string;
   label: string;
 }
+
+export interface IStockContext {
+  data: IRowData[];
+  search: string;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
+}
