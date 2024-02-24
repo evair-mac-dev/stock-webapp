@@ -5,6 +5,11 @@ import { Row } from '@molecules';
 
 export const Table: FC<ITable> = (props) => {
   const { data } = props;
+  console.log('data', data);
+  if (data.length === 0) {
+    return <div className="noData">No data available</div>;
+  }
+
   const header = Object.keys(data[0]).map((val) => capitalize(val));
   const emptyRow = header.map(() => '');
 

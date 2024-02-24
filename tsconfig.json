@@ -45,6 +45,10 @@
       "@providers": [
         "./src/providers",
         "./src/providers/*"
+      ],
+      "@services": [
+        "./src/services",
+        "./src/services/*"
       ]
     }
   },

@@ -1,48 +1,38 @@
-import { ChangeEvent, createContext, ReactNode, useEffect, useState } from 'react';
+import { ChangeEvent, createContext, ReactNode, useState } from 'react';
 import { IStockContext } from '@interfaces';
-
-const defaultData = [
-  {
-    item: 'Price',
-    maximum: '$100',
-    minimum: '$50',
-    average: '$75',
-  },
-  {
-    item: 'Volume',
-    maximum: '1000',
-    minimum: '500',
-    average: '700',
-  },
-];
+import { fetchStockData } from '@services';
 
 export const StockContext = createContext<IStockContext>({
-  data: defaultData,
+  data: [],
   search: '',
   handleChange: () => {},
   onClick: () => {},
 });
 
 export const StockProvider = ({ children }: { children: ReactNode }) => {
-  const [data, setData] = useState(defaultData);
+  const [data, setData] = useState([]);
   const [search, setSearch] = useState('');
+  const [cache, setCache] = useState<{ [key: string]: [] }>({});
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     setSearch(event.target.value);
   };
 
-  const onClick = () => {
-    console.log(search);
+  const onClick = async () => {
+    console.log('stockData', search);
+    if (cache[search]) {
+      console.log('cache', cache[search]);
+      setData(cache[search]);
+    } else {
+      console.log('fetching');
+      const stockData = await fetchStockData(search);
+      setData(stockData);
+      setCache((prevCache) => ({
+        ...prevCache,
+        [search]: stockData,
+      }));
+    }
   };
-
-  useEffect(() => {
-    const loadData = async () => {
-      setData(defaultData);
-    };
-
-    loadData();
-  }, []);
 
   return (
     <StockContext.Provider value={{ data, search, handleChange, onClick }}>

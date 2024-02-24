@@ -1,5 +1,5 @@
 import { SearchBar, Table } from '@organisms';
-import { StockContext, StockProvider } from '@providers';
+import { StockContext } from '@providers';
 import './App.scss';
 import { useContext } from 'react';
 
@@ -8,10 +8,8 @@ function App() {
 
   return (
     <div className="app">
-      <StockProvider>
-        <SearchBar label="Enter a Stock Ticker" id="searchBar" />
-        <Table data={data} />
-      </StockProvider>
+      <SearchBar label="Enter a Stock Ticker" id="searchBar" />
+      <Table data={data} />
     </div>
   );
 }
