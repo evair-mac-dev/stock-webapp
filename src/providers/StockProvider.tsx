@@ -19,12 +19,9 @@ export const StockProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const onClick = async () => {
-    console.log('stockData', search);
     if (cache[search]) {
-      console.log('cache', cache[search]);
       setData(cache[search]);
     } else {
-      console.log('fetching');
       const stockData = await fetchStockData(search);
       setData(stockData);
       setCache((prevCache) => ({
